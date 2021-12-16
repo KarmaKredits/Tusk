@@ -93,11 +93,12 @@ class RLBot
   end
 
   def update_all_roles(event)
+    message = event.channel.send('Updating ranks of all registered users...')
     all_users = RLDB.all_users(event.server.id)
     all_users.each { |db_user|
       member = event.server.member(db_user.id)
       if member
-        ranks(member, event)
+        ranksAll(member, event, message)
         sleep(3)
       end
     }
